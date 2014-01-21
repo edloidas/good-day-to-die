@@ -1,4 +1,4 @@
-good-day-to-die
-===============
+A good day to die
+=================
 
-Text rogue rpg.
+Rogue-like text RPG in cyberpunk setting.
