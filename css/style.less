@@ -1,0 +1,259 @@
+/**
+ * EDLOIDAS DEVPAGE
+ * CSS STYLE
+ *
+ * @author edloidas
+ * @link edloidas@gmail.com
+ */
+
+/*
+-------------------------------------------------------------------------------
+LESS
+-------------------------------------------------------------------------------
+*/
+@color-dark-text:  #F5F5F5;
+@color-dark-bg:    #333;
+@color-light-text: #333;
+@color-light-bg:   #eee;
+@color-special-bg: #FF1493;
+
+@color-white:  #F5F5F5; // whiteSmoke
+@color-blue:   #87CEEB; // skyBlue
+@color-red:    #FF1493; // deepPink
+@color-green:  #ADFF2F; // greenYellow
+@color-orange: #FF8C00; // orange
+@color-yellow: #F0E68C; // khaki
+
+.rounded-corners (@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius:    @radius;
+    -ms-border-radius:     @radius;
+    -o-border-radius:      @radius;
+    border-radius:         @radius;
+}
+
+.transition(@time: 0.3s) {
+    transition: @time;
+    -webkit-transition: @time;
+}
+
+.noselect {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+/*
+-------------------------------------------------------------------------------
+FONTS
+-------------------------------------------------------------------------------
+*/
+// http://fontfabric.com/archive-free-font/
+@font-face {
+    font-family: "Archive";
+    src: url(/fonts/Archive.otf) format("truetype");
+}
+
+.font-family {
+    font-family: "Arial Black", Gadget, "Courier New", Courier, monospace;
+}
+
+.font-family-title {
+    font-family: "Archive", Impact, Charcoal, sans-serif;
+}
+
+/*
+-------------------------------------------------------------------------------
+CSS
+-------------------------------------------------------------------------------
+*/
+html {
+    height: 100%;
+}
+
+body {
+    background: @color-light-bg;
+    color: @color-light-text;
+    .font-family;
+    font-size: 14px;
+    .noselect;
+    cursor: default;
+    a {
+        color: @color-light-text;
+    }
+    &.light {}
+    &.dark {
+        background: @color-dark-bg;
+        color: @color-dark-text;
+        #content {
+            border: 1px solid (@color-dark-bg + #111);
+            outline: 1px solid (@color-dark-bg - #111);
+        }
+        a {
+            color: @color-dark-text;
+        }
+        .list .date {
+            color: @color-dark-text - #666;
+        }
+        #backToMenu {
+            background: @color-dark-bg + #333;
+            &:active {
+                opacity: 1.0;
+                background: @color-special-bg;
+            }
+        }
+    }
+}
+
+#content {
+    width: 800px;
+    height: 480px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: -240px 0 0 -400px;
+    border: 1px solid (@color-light-bg + #111);
+    outline: 1px solid (@color-light-bg - #222);
+    &.normal {}
+    &.big {
+        width: 1000px;
+        height: 600px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin: -300px 0 0 -500px;
+    }
+    &.auto {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+    }
+
+    &.menu > #menu,
+    &.save > #submenu,
+    &.load > #submenu,
+    &.settings > #submenu,
+    &.credits > #submenu,
+    &.newgame > #game {
+        display: block;
+    }
+    &.save > #submenu,
+    &.load > #submenu {
+        .list {
+            margin: 0 200px;
+        }
+    }
+}
+
+#menu, #submenu, #game {
+    display: none;
+}
+
+#menu {
+    margin: 0px 200px;
+}
+
+.title {
+    .font-family-title;
+    font-size: 1.5em;
+    text-align: center;
+    margin: 30px 0px 50px;
+    h1 {
+        margin: 0px;
+    }
+    p {
+        margin: 5px 0;
+    }
+}
+
+.list {
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 10px;
+    .data {
+        float: left;
+    }
+    .date {
+        padding: 0.1em 0;
+        font-size: 0.8em;
+        color: @color-light-text + #666;
+        float: right;
+
+    }
+}
+
+ul.list {
+    list-style: none;
+    li {
+        display: block;
+        a {
+            background: rgba( 204, 204, 204, 0.1 );
+            margin: 2px;
+            padding: 5px;
+            display: block;
+            text-decoration: none;
+            font-weight: bold;
+            overflow: hidden;
+            cursor: default;
+            .rounded-corners(3px);
+            &:hover {
+                background: rgba( 204, 204, 204, 0.4 );
+            }
+        }
+    }
+}
+
+table.list {
+    width: 100%;
+    tr td {
+        &:first-child {
+            width: 50%;
+            text-align: right;
+        }
+        &:last-child {
+            text-align: left;
+            font-weight: normal;
+            opacity: 0.5;
+        }
+    }
+}
+
+#backToMenu {
+    background: @color-light-bg - #333;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 2px;
+    padding: 5px;
+    .rounded-corners;
+    cursor: pointer;
+    opacity:0.4;
+    &:hover {
+        opacity:1.0;
+    }
+    &:active {
+        opacity:1.0;
+        background: @color-special-bg;
+    }
+}
+
+/*
+-------------------------------------------------------------------------------
+CLEARFIX
+-------------------------------------------------------------------------------
+*/
+.cf {
+    *zoom: 1;
+    &:before, &:after {
+        content: " ";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
