@@ -1,0 +1,10 @@
+# Directories #
+node_modules/
+lib/
+fonts/
+
+# Files #
+*.sh
+*.bat
+*.cmd
+server.js
