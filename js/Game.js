@@ -13,11 +13,13 @@ function GameController( $scope, $http ) {
         size: "normal",
         theme: "light",
         display: "menu",
-        version: "0.1"
+        status: "waiting",
+        version: "0.0.1"
     };
 
     $scope.menu = [
         { name: 'New Game', id: 'newgame' },
+        { name: 'Continue', id: 'continue' },
         { name: 'Settings', id: 'settings' },
         { name: 'Save', id: 'save' },
         { name: 'Load', id: 'load' },
@@ -47,7 +49,8 @@ function GameController( $scope, $http ) {
         ],
         credits: [
             { name: "Programming", values: [ "edloidas" ] },
-            { name: "Story", values: [ "edloidas", "Nartien" ] },
+            { name: "Interface", values: [ "edloidas" ] },
+            { name: "Story", values: [ "Nartien", "edloidas" ] },
             { name: "Version", values: [ $scope.meta.version ] }
         ]
     };
@@ -59,7 +62,7 @@ function GameController( $scope, $http ) {
         $scope.submenu.title = $scope.menu[ index ].name;
         $scope.meta.display =  $scope.menu[ index ].id || 'menu';
         if ( $scope.meta.display === 'newgame' ) {
-            newgame();
+            newGame();
         }
     };
 
@@ -67,19 +70,32 @@ function GameController( $scope, $http ) {
         $scope.meta.display = 'menu';
     };
 
-    var newgame = function () {
 
+
+    var newGame = function () {
+        try {
+            // start new game
+            $scope.meta.display = "continue";
+            $scope.meta.status = "active";
+        } catch ( e ) {
+            $scope.meta.display = "menu";
+        }
     };
 
-    /*
-     * Menu methods
-     */
-    var load = function ( slot ) {
+    var continueGame = function () {
 
+    }
+
+    var loadGame = function ( slot ) {
+        // load save
+        // load level from json
+        // apply save to level
+        $scope.meta.status = "active";
     };
 
-    var save = function ( slot ) {
-
+    var saveGame = function ( slot ) {
+        // save global flags
+        // save level flags
     };
 
     $scope.saveSettings = function () {

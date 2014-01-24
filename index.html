@@ -19,71 +19,91 @@
     </head>
 
     <body class="{{meta.theme}}" ng-controller="GameController">
-        <div id="content" class="{{meta.size}} {{meta.display}}">
+        <div id="content" class="{{meta.size}} {{meta.display}} {{meta.status}}">
             <div id="menu">
                 <div class="title">
                     <h1>{{meta.franchise}}</h1>
                     <p>{{meta.name}}</p>
                 </div>
-                <ul class="list">
-                    <li ng-repeat="el in menu">
-                        <a id="{{el.id}}" ng-click="runMenu($index);">{{el.name}}</a>
-                    </li>
-                </ul>
+                <div class="holder">
+                    <ul class="list">
+                        <li ng-repeat="el in menu">
+                            <a id="{{el.id}}" ng-click="runMenu($index);">{{el.name}}</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div id="submenu">
                 <div class="title">
                     <p>{{submenu.title}}</p>
                 </div>
-                <!-- options, credits -->
-                <table class="list" ng-if="meta.display === 'settings'">
-                    <tbody>
-                        <tr>
-                            <td>Game size : </td>
-                            <td>
-                                <select ng-model="meta.size"
-                                        ng-options="e for e in submenu.settings.size"
-                                        ng-change="saveSettings()">
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Color theme : </td>
-                            <td>
-                                <select ng-model="meta.theme"
-                                        ng-options="e for e in submenu.settings.theme"
-                                        ng-change="saveSettings()">
-                                </select>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="list" ng-if="meta.display === 'credits'">
-                    <tbody>
-                        <tr ng-repeat="el in submenu.credits">
-                            <td>{{el.name}} : </td>
-                            <td>{{el.values.toString().replace(',', ', ')}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <!-- save, load -->
-                <ul class="list" ng-if="meta.display === 'save'">
-                    <li ng-repeat="el in submenu.save">
-                        <a ng-click="save($index);">
-                            <div class="data">Slot #{{$index + 1}}</div>
-                            <div class="date">{{el.date}}</div>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="list" ng-if="meta.display === 'load'">
-                    <li ng-repeat="el in submenu.load">
-                        <a ng-click="load($index);">
-                            <div class="data">Slot #{{$index + 1}}</div>
-                            <div class="date">{{el.date}}</div>
-                        </a>
-                    </li>
-                </ul>
+                <div class="scroll">
+                    <div class="holder">
+                        <table class="list" ng-if="meta.display === 'settings'">
+                            <tbody>
+                                <tr>
+                                    <td>Game size : </td>
+                                    <td>
+                                        <select ng-model="meta.size"
+                                                ng-options="e for e in submenu.settings.size"
+                                                ng-change="saveSettings()">
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Color theme : </td>
+                                    <td>
+                                        <select ng-model="meta.theme"
+                                                ng-options="e for e in submenu.settings.theme"
+                                                ng-change="saveSettings()">
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="list" ng-if="meta.display === 'credits'">
+                            <tbody>
+                                <tr ng-repeat="el in submenu.credits">
+                                    <td>{{el.name}} : </td>
+                                    <td>{{el.values.toString().replace(',', ', ')}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <ul class="list" ng-if="meta.display === 'save'">
+                            <li ng-repeat="el in submenu.save">
+                                <a ng-click="save($index);">
+                                    <div class="data">Slot #{{$index + 1}}</div>
+                                    <div class="date">{{el.date}}</div>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <ul class="list" ng-if="meta.display === 'load'">
+                            <li ng-repeat="el in submenu.load">
+                                <a ng-click="load($index);">
+                                    <div class="data">Slot #{{$index + 1}}</div>
+                                    <div class="date">{{el.date}}</div>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
             </div>
+            <div id="game">
+                <div id="screen">
+                    <div class="holder">
+                    </div>
+                </div>
+                <div id="status"></div>
+                <div id="actions">
+                    <div class="holder">
+                    </div>
+                </div>
+            </div>
+            <!-- Always visible, except main menu -->
             <div id="backToMenu" ng-click="backToMenu()">⇚menu</div>
         </div>
     </body>
