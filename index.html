@@ -59,6 +59,14 @@
                                         </select>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>Fullscreen : </td>
+                                    <td>
+                                        <input type="checkbox"
+                                               ng-model="meta.fullscreen"
+                                               ng-change="toggleFullscreen()">
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
 
@@ -95,19 +103,34 @@
             <div id="game">
                 <div id="screen">
                     <div class="holder">
+                        <i>Lorem ipsum</i>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec imperdiet posuere nisi, et iaculis orci luctus dictum. Nunc dolor tortor, dignissim eu augue non, egestas pharetra nisi. Duis porttitor nibh nulla, a feugiat leo tincidunt id. Nunc aliquam mollis eros rhoncus facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce imperdiet hendrerit est, ut fringilla mauris molestie nec. Sed iaculis nisi ut mauris tincidunt vulputate. Pellentesque auctor porta leo quis ullamcorper. Nulla imperdiet aliquam sem non imperdiet. Nam ultricies eros nibh. Pellentesque congue velit purus. Phasellus lobortis ornare purus, id vestibulum dui pellentesque sed.</p>
+                        <p>Aliquam risus augue, suscipit non bibendum elementum, sollicitudin id diam. Donec at imperdiet massa. Integer sed vulputate massa. Mauris sit amet suscipit dui. Suspendisse iaculis elit porttitor molestie tincidunt. Proin pretium sollicitudin neque eu vehicula. Duis scelerisque nunc at facilisis vehicula.</p>
+                        <p>Duis sodales sagittis mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi sit amet dapibus lectus, eu volutpat felis. Aenean consectetur vehicula justo vel laoreet. Cras tempor interdum nulla nec iaculis. Nam quis commodo nulla, sit amet congue est. Pellentesque aliquam tristique libero. Aenean dictum quis urna sit amet accumsan. Pellentesque semper mauris a dolor imperdiet facilisis. Morbi malesuada, augue vel suscipit cursus, libero sem gravida nibh, id vehicula sem urna eu mi. Aenean vestibulum dolor odio. Nunc nisl lacus, aliquam a erat sed, molestie consectetur velit. Cras porttitor interdum felis sit amet aliquam. Aenean iaculis ultricies nulla vel dignissim.</p>
                     </div>
                 </div>
                 <div id="status">
                     <div class="holder">
+                        <div class="button"><a>HP</a><span class="index">57%</span></div>
+                        <div class="button"><a>AUG</a><span class="index">3/6</span></div>
+                        <div class="button"><a>INV</a><span class="index">12/25</span></div>
+                        <div class="button"><a>MAP</a></div>
+                        <div class="button"><a>EXT</a></div>
                     </div>
                 </div>
                 <div id="actions">
                     <div class="holder">
+                        <ul class="list">
+                            <li><a>Target</a></li>
+                            <li><a>Use</a></li>
+                            <li><a>Talk</a></li>
+                            <li><a>Attack</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
             <!-- Always visible, except main menu -->
-            <div id="backToMenu" ng-click="backToMenu()">⇚menu</div>
+            <div id="backToMenu" ng-click="backToMenu()">menu</div>
         </div>
     </body>
 </html>

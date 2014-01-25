@@ -11,13 +11,13 @@
 LESS
 -------------------------------------------------------------------------------
 */
-@color-dark-text:  #F5F5F5;
+@color-dark-text:  #EEE;
 @color-dark-bg:    #333;
 @color-light-text: #333;
-@color-light-bg:   #eee;
+@color-light-bg:   #EEE;
 @color-special-bg: #FF1493;
 
-.rounded-corners (@radius: 5px) {
+.rounded-corners(@radius: 5px) {
     -webkit-border-radius: @radius;
     -moz-border-radius:    @radius;
     -ms-border-radius:     @radius;
@@ -30,7 +30,7 @@ LESS
     -webkit-transition: @time;
 }
 
-.noselect {
+.noselect() {
     -webkit-user-select: none;
     -moz-user-select:    none;
     -ms-user-select:     none;
@@ -50,7 +50,7 @@ LESS
     box-shadow:         0 0 10px 2px @color;
 }
 
-.box-sizing {
+.box-sizing() {
     -webkit-box-sizing: border-box;
     -moz-box-sizing:    border-box;
     box-sizing:         border-box;
@@ -67,12 +67,20 @@ FONTS
     src: url(/fonts/Archive.otf) format("truetype");
 }
 
-.font-family {
-    font-family: "Arial Black", Gadget, Arial, "Courier New", Courier, monospace;
+@font-face {
+    font-family: "Orbitron";
+    src: url(/fonts/Orbitron-Medium.otf) format("truetype");
 }
 
-.font-family-title {
-    font-family: "Archive", Impact, Arial, Charcoal, sans-serif;
+.font-family {
+    font-family: Arial, Tahoma, Helvetica, Geneva, "Courier New", Courier, monospace;
+    // text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+}
+
+.font-family-alt {
+    font-family: "Orbitron", "Archive", Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 /*
@@ -80,19 +88,18 @@ FONTS
 CSS
 -------------------------------------------------------------------------------
 */
-html {
+html, body {
     height: 100%;
+    margin: 0;
 }
 
 body {
     background: @color-light-bg;
-    margin: 0;
     color: @color-light-text;
-    font-size: 14px;
+    font-size: 17px;
     overflow: hidden;
     cursor: default;
     .font-family;
-    .noselect;
     a {
         color: @color-light-text;
     }
@@ -101,13 +108,13 @@ body {
         background: @color-dark-bg;
         color: @color-dark-text;
         #content {
+            background: @color-dark-bg;
             border: 1px solid (@color-dark-bg + #111);
             outline: 1px solid (@color-dark-bg - #111);
         }
         #status {
             border-top: 1px solid (@color-dark-bg + #222);
             border-bottom: 1px solid (@color-dark-bg + #222);
-            outline: 1px solid (@color-dark-bg);
             .outer-shadow(@color-dark-bg + #111);
         }
         a {
@@ -133,9 +140,11 @@ body {
     left: 50%;
     margin: -241px 0 0 -401px;
     position: absolute;
+    background: @color-light-bg;
     border: 1px solid (@color-light-bg + #111);
     outline: 1px solid (@color-light-bg - #222);
     overflow: hidden;
+    .noselect;
     &.normal {}
     &.big {
         width: 1000px;
@@ -190,7 +199,7 @@ body {
 
 #game .holder {
     // about 75-80 symbols
-    max-width: 700px;
+    max-width: 680px;
     overflow-x: hidden;
 }
 
@@ -231,24 +240,46 @@ body {
     bottom: 140px;
     border-top: 1px solid (@color-light-bg - #222);
     border-bottom: 1px solid (@color-light-bg - #222);
-    outline: 1px solid @color-light-bg;
     .outer-shadow(@color-light-bg - #222);
+    .box-sizing;
     .holder {
         max-width: 1000px;
         overflow-y: hidden;
+        text-align: center;
+        .font-family-alt;
+        .button {
+            width: 20%;
+            height: 38px;
+            padding-top: 5px;
+            font-size: 1.4em;
+            float: left;
+            .box-sizing;
+            &:hover {
+                text-shadow: 0 0 8px SteelBlue;
+                index {
+                    color: @color-light-text;
+                }
+            }
+            .index {
+                padding: 0 6px;
+                font-size: 0.5em;
+                color: @color-light-text + #555;
+                vertical-align: 7px;
+            }
+        }
     }
 }
 #actions {
     height: 140px;
     bottom: 0;
     .holder {
-        padding: 5px 0;
+        padding: 3px 0 2px;
     }
 }
 
 
 .title {
-    .font-family-title;
+    .font-family-alt;
     font-size: 1.5em;
     text-align: center;
     margin: 0 0 30px;
@@ -288,7 +319,6 @@ ul.list {
             padding: 5px;
             display: block;
             text-decoration: none;
-            font-weight: bold;
             overflow: hidden;
             cursor: default;
             .rounded-corners(3px);
@@ -311,7 +341,7 @@ table.list {
         &:last-child {
             text-align: left;
             font-weight: normal;
-            opacity: 0.5;
+            opacity: 0.8;
         }
     }
     select {
@@ -329,7 +359,7 @@ table.list {
     font-weight: bold;
     .rounded-corners;
     cursor: pointer;
-    opacity: 0.2;
+    opacity: 0.15;
     &:hover, &:active {
         opacity: 1.0;
     }
