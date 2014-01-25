@@ -1,12 +1,3 @@
-/**
- * DAWN OF AEGIS
- * A GOOD DAY TO DIE
- *
- * @author edloidas
- * @link edloidas@gmail.com
- * license MIT
- */
-
 function GameController( $scope, $http ) {
     $scope.meta = {
         franchise: "Dawn of Aegis",
