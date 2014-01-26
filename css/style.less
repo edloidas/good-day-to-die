@@ -11,11 +11,22 @@
 LESS
 -------------------------------------------------------------------------------
 */
-@color-dark-text:  #EEE;
-@color-dark-bg:    #333;
-@color-light-text: #333;
-@color-light-bg:   #EEE;
-@color-special-bg: #FF1493;
+@color-l-text:       #333;
+@color-l-bg:         #EEE;
+@color-l-link:       #D3D3D3;
+@color-l-link-hover: #C0C0C0;
+
+@color-d-text:       #bbb;
+@color-d-bg:         #303942;
+@color-d-link:       #3d464f;
+@color-d-link-hover: #445566;
+
+@color-hp:     #EE0000; // red
+@color-aug:    #ADFF2F; // greenYellow
+@color-inv:    #FF8C00; // orange
+@color-map:    #87CEEB; // skyBlue
+@color-ext:    #FF1493; // deepPink
+@color-menu:   #F0E68C; // khaki
 
 .rounded-corners(@radius: 5px) {
     -webkit-border-radius: @radius;
@@ -38,13 +49,13 @@ LESS
     user-select:         none;
 }
 
-.inner-shadow( @color: @color-light-bg ) {
-    -moz-box-shadow:    inset 0 0 40px @color;
-    -webkit-box-shadow: inset 0 0 40px @color;
-    box-shadow:         inset 0 0 40px @color;
+.inner-shadow( @color: @color-l-bg ) {
+    -moz-box-shadow:    inset 0 0 40px 4px @color;
+    -webkit-box-shadow: inset 0 0 40px 4px @color;
+    box-shadow:         inset 0 0 40px 4px @color;
 }
 
-.outer-shadow( @color: @color-dark-bg ) {
+.outer-shadow( @color: @color-d-bg ) {
     -moz-box-shadow:    0 0 10px 2px @color;
     -webkit-box-shadow: 0 0 10px 2px @color;
     box-shadow:         0 0 10px 2px @color;
@@ -54,6 +65,10 @@ LESS
     -webkit-box-sizing: border-box;
     -moz-box-sizing:    border-box;
     box-sizing:         border-box;
+}
+
+.text-shadow( @color: @color-d-bg ) {
+    text-shadow: 0 0 10px @color, 0 0 2px  @color;
 }
 
 /*
@@ -74,7 +89,6 @@ FONTS
 
 .font-family {
     font-family: Arial, Tahoma, Helvetica, Geneva, "Courier New", Courier, monospace;
-    // text-transform: uppercase;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -94,40 +108,46 @@ html, body {
 }
 
 body {
-    background: @color-light-bg;
-    color: @color-light-text;
+    background: @color-l-bg;
+    color: @color-l-text;
     font-size: 17px;
     overflow: hidden;
     cursor: default;
     .font-family;
-    a {
-        color: @color-light-text;
-    }
     &.light {}
     &.dark {
-        background: @color-dark-bg;
-        color: @color-dark-text;
+        background: @color-d-bg;
+        color: @color-d-text;
         #content {
-            background: @color-dark-bg;
-            border: 1px solid (@color-dark-bg + #111);
-            outline: 1px solid (@color-dark-bg - #111);
+            background: @color-d-bg;
+            border: 1px solid (@color-d-bg + #111);
+            outline: 1px solid (@color-d-bg - #111);
         }
         #status {
-            border-top: 1px solid (@color-dark-bg + #222);
-            border-bottom: 1px solid (@color-dark-bg + #222);
-            .outer-shadow(@color-dark-bg + #111);
+            border-top: 1px solid (@color-d-bg + #222);
+            border-bottom: 1px solid (@color-d-bg + #222);
+            .outer-shadow(@color-d-bg + #111);
+            .button {
+                &.active, &:active {
+                    .inner-shadow(@color-d-link);
+                }
+            }
         }
-        a {
-            color: @color-dark-text;
+        #status, .title {
+            color: @color-d-text + #333;
         }
-        .list .date {
-            color: @color-dark-text - #666;
+        .list {
+            a {
+                background: @color-d-link;
+                &:hover {
+                    background: @color-d-link-hover;
+                }
+            }
         }
         #backToMenu {
-            background: @color-dark-bg + #333;
+            background: @color-d-bg + #333;
             &:active {
-                opacity: 1.0;
-                background: @color-special-bg;
+                background: @color-menu;
             }
         }
     }
@@ -140,12 +160,12 @@ body {
     left: 50%;
     margin: -241px 0 0 -401px;
     position: absolute;
-    background: @color-light-bg;
-    border: 1px solid (@color-light-bg + #111);
-    outline: 1px solid (@color-light-bg - #222);
+    background: @color-l-bg;
+    border: 1px solid (@color-l-bg + #111);
+    outline: 1px solid (@color-l-bg - #222);
     overflow: hidden;
     .noselect;
-    &.normal {}
+    // &.normal {}
     &.big {
         width: 1000px;
         height: 600px;
@@ -235,12 +255,13 @@ body {
         padding: 10px 0;
     }
 }
+
 #status {
     height: 40px;
     bottom: 140px;
-    border-top: 1px solid (@color-light-bg - #222);
-    border-bottom: 1px solid (@color-light-bg - #222);
-    .outer-shadow(@color-light-bg - #222);
+    border-top: 1px solid (@color-l-bg - #222);
+    border-bottom: 1px solid (@color-l-bg - #222);
+    .outer-shadow(@color-l-bg - #222);
     .box-sizing;
     .holder {
         max-width: 1000px;
@@ -252,23 +273,33 @@ body {
             height: 38px;
             padding-top: 5px;
             font-size: 1.4em;
+            text-transform: uppercase;
             float: left;
             .box-sizing;
             &:hover {
-                text-shadow: 0 0 8px SteelBlue;
-                index {
-                    color: @color-light-text;
+                &.hp  { .text-shadow(@color-hp); }
+                &.aug { .text-shadow(@color-aug); }
+                &.inv { .text-shadow(@color-inv); }
+                &.map { .text-shadow(@color-map); }
+                &.ext { .text-shadow(@color-ext); }
+                .index {
+                    opacity: 1.0;
                 }
+            }
+            &.active, &:active {
+                .inner-shadow(@color-l-link);
             }
             .index {
                 padding: 0 6px;
                 font-size: 0.5em;
-                color: @color-light-text + #555;
+                opacity: 0.5;
                 vertical-align: 7px;
+                .font-family-alt;
             }
         }
     }
 }
+
 #actions {
     height: 140px;
     bottom: 0;
@@ -277,18 +308,16 @@ body {
     }
 }
 
-
 .title {
-    .font-family-alt;
     font-size: 1.5em;
     text-align: center;
     margin: 0 0 30px;
     padding: 30px 0 0;
-    h1 {
+    .font-family-alt;
+    h1, p {
         margin: 0;
     }
     p {
-        margin: 0;
         padding: 5px 0;
     }
 }
@@ -297,15 +326,27 @@ body {
     padding: 0;
     margin: 0;
     font-weight: bold;
+    a {
+        background: @color-l-link;
+        margin: 2px;
+        padding: 5px;
+        display: block;
+        text-decoration: none;
+        overflow: hidden;
+        cursor: default;
+        .rounded-corners(3px);
+        &:hover {
+            background: @color-l-link-hover;
+        }
+    }
     .data {
         float: left;
     }
     .date {
         padding: 0.1em 0;
         font-size: 0.8em;
-        color: @color-light-text + #666;
+        opacity: 0.3;
         float: right;
-
     }
 }
 
@@ -313,26 +354,12 @@ ul.list {
     list-style: none;
     li {
         display: block;
-        a {
-            background: rgba( 153, 153, 153, 0.2 );
-            margin: 2px;
-            padding: 5px;
-            display: block;
-            text-decoration: none;
-            overflow: hidden;
-            cursor: default;
-            .rounded-corners(3px);
-            &:hover {
-                background: rgba( 153, 153, 153, 0.4 );
-            }
-        }
     }
 }
 
 table.list {
     width: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden;
     tr td {
         &:first-child {
             width: 50%;
@@ -340,8 +367,7 @@ table.list {
         }
         &:last-child {
             text-align: left;
-            font-weight: normal;
-            opacity: 0.8;
+            opacity: 0.75;
         }
     }
     select {
@@ -350,20 +376,20 @@ table.list {
 }
 
 #backToMenu {
-    background: @color-light-bg - #333;
+    background: @color-l-bg - #333;
     position: absolute;
     bottom: 0;
     right: 0;
     margin: 2px;
     padding: 5px;
     font-weight: bold;
-    .rounded-corners;
     cursor: pointer;
     opacity: 0.15;
+    .rounded-corners;
     &:hover, &:active {
         opacity: 1.0;
     }
     &:active {
-        background: @color-special-bg;
+        background: @color-menu;
     }
 }
