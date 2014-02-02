@@ -18,8 +18,8 @@
         <script src="js/Game.js"></script>
     </head>
 
-    <body class="{{meta.theme}}" ng-controller="GameController">
-        <div id="content" class="{{meta.size}} {{meta.display}} {{meta.status}}">
+    <body class="{{settings.theme}}" ng-controller="GameController">
+        <div id="content" class="{{settings.size}} {{meta.display}} {{meta.status}}">
             <div id="menu">
                 <div class="title">
                     <h1>{{meta.franchise}}</h1>
@@ -44,7 +44,7 @@
                                 <tr>
                                     <td>Game size : </td>
                                     <td>
-                                        <select ng-model="meta.size"
+                                        <select ng-model="settings.size"
                                                 ng-options="e for e in submenu.settings.size"
                                                 ng-change="saveSettings()">
                                         </select>
@@ -53,7 +53,7 @@
                                 <tr>
                                     <td>Color theme : </td>
                                     <td>
-                                        <select ng-model="meta.theme"
+                                        <select ng-model="settings.theme"
                                                 ng-options="e for e in submenu.settings.theme"
                                                 ng-change="saveSettings()">
                                         </select>
@@ -63,7 +63,7 @@
                                     <td>Fullscreen : </td>
                                     <td>
                                         <input type="checkbox"
-                                               ng-model="meta.fullscreen"
+                                               ng-model="settings.fullscreen"
                                                ng-change="toggleFullscreen()">
                                     </td>
                                 </tr>
@@ -79,24 +79,14 @@
                             </tbody>
                         </table>
 
-                        <ul class="list" ng-if="meta.display === 'save'">
-                            <li ng-repeat="el in submenu.save">
-                                <a ng-click="save($index);">
-                                    <div class="data">Slot #{{$index + 1}}</div>
-                                    <div class="date">{{el.date}}</div>
+                        <ul class="list" ng-if="meta.display === 'episodes'">
+                            <li ng-repeat="ep in submenu.episodes">
+                                <a ng-click="runEpisode($index);">
+                                    <div class="data">Episode #{{$index + 1}}</div>
+                                    <div class="name">{{ep.name}}</div>
                                 </a>
                             </li>
                         </ul>
-
-                        <ul class="list" ng-if="meta.display === 'load'">
-                            <li ng-repeat="el in submenu.load">
-                                <a ng-click="load($index);">
-                                    <div class="data">Slot #{{$index + 1}}</div>
-                                    <div class="date">{{el.date}}</div>
-                                </a>
-                            </li>
-                        </ul>
-
                     </div>
                 </div>
             </div>
@@ -112,9 +102,9 @@
                 <div id="status">
                     <div class="holder">
                         <div class="button hp"><a>HP</a><span class="index">57%</span></div>
-                        <div class="button aug"><a>AUG</a><span class="index">3/6</span></div>
+                        <div class="button imp"><a>IMP</a><span class="index">3/6</span></div>
                         <div class="button inv"><a>INV</a><span class="index">12/25</span></div>
-                        <div class="button map"><a>MAP</a></div>
+                        <div class="button com"><a>COM</a></div>
                         <div class="button ext active"><a>EXT</a></div>
                     </div>
                 </div>

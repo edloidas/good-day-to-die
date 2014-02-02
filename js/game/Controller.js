@@ -1,21 +1,26 @@
+/*
+===============================================================================
+
+    Game Controller.
+
+===============================================================================
+*/
 function GameController( $scope, $http ) {
     $scope.meta = {
         franchise: "Dawn of Aegis",
         name: "A Good Day To Die",
-        size: "normal",
-        theme: "light",
         display: "menu",
         status: "waiting",
-        fullscreen: false,
         version: "0.0.1"
     };
+
+    $scope.settings = DOA.Storage.settings;
 
     $scope.menu = [
         { name: 'New Game', id: 'newgame' },
         { name: 'Continue', id: 'continue' },
+        { name: 'Episodes', id: 'episodes' },
         { name: 'Settings', id: 'settings' },
-        { name: 'Save', id: 'save' },
-        { name: 'Load', id: 'load' },
         { name: 'Credits', id: 'credits' }
     ];
 
@@ -26,20 +31,6 @@ function GameController( $scope, $http ) {
             size: [ "normal", "big", "auto" ],
             theme: [ "light", "dark" ]
         },
-        load: [ // max 5 slots
-            { data: "", date: "empty" },
-            { data: "", date: "empty" },
-            { data: "", date: "empty" },
-            { data: "", date: "empty" },
-            { data: "", date: "empty" }
-        ],
-        save: [ // max 5 slots
-            { data: "", date: "empty" },
-            { data: "", date: "empty" },
-            { data: "", date: "empty" },
-            { data: "", date: "empty" },
-            { data: "", date: "empty" }
-        ],
         credits: [
             { name: "Programming", values: [ "edloidas" ] },
             { name: "Interface", values: [ "edloidas" ] },
@@ -62,10 +53,6 @@ function GameController( $scope, $http ) {
     $scope.backToMenu = function () {
         $scope.meta.display = 'menu';
     };
-    function zeta(scope) {
-        console.log(scope);
-    }
-    zeta($scope);
 
     $scope.toggleFullscreen = function () {
         if ( !document.fullscreenElement &&
@@ -100,7 +87,7 @@ function GameController( $scope, $http ) {
              document.mozFullscreenElement === document.documentElement ||
              document.mozFullScreenElement === document.documentElement ||
              document.webkitFullscreenElement === document.documentElement ) {
-            $scope.meta.fullscreen = document.mozFullScreen || document.webkitIsFullScreen || false;
+            $scope.settings.fullscreen = document.mozFullScreen || document.webkitIsFullScreen || false;
         }
     }
 
@@ -110,7 +97,6 @@ function GameController( $scope, $http ) {
 
     var newGame = function () {
         try {
-            // start new game
             $scope.meta.display = "continue";
             $scope.meta.status = "active";
         } catch ( e ) {
@@ -119,47 +105,15 @@ function GameController( $scope, $http ) {
     };
 
     var continueGame = function () {
-
+        // load last episode
     };
 
-    var loadGame = function ( slot ) {
-        // load save
-        // load level from json
-        // apply save to level
-        $scope.meta.status = "active";
-    };
-
-    var saveGame = function ( slot ) {
-        // save global flags
-        // save level flags
-    };
-
-    $scope.saveSettings = function () {
-        try {
-            localStorage.gdtdSettings = JSON.stringify({ size: $scope.meta.size,
-                                                         theme: $scope.meta.theme });
-        } catch ( e ) {
-            console.warn( e );
-        }
-    };
-
-    var loadSettings = function () {
-        try {
-            // not undefined or null
-            if ( localStorage.gdtdSettings !== undefined ) {
-                var settings = JSON.parse( localStorage.gdtdSettings );
-                $scope.meta.size = settings.size || $scope.meta.size;
-                $scope.meta.theme = settings.theme || $scope.meta.theme;
-            }
-        } catch ( e ) {
-            console.warn( e );
-        }
-    };
+    $scope.saveSettings = DOA.Storage.saveSettings;
 
     /*
      * Post processing
      */
-    loadSettings();
+    DOA.Storage.loadSettings();
 }
 
 function formatDate( date ) {

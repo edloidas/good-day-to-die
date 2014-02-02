@@ -22,9 +22,9 @@ LESS
 @color-d-link-hover: #445566;
 
 @color-hp:     #EE0000; // red
-@color-aug:    #ADFF2F; // greenYellow
+@color-imp:    #ADFF2F; // greenYellow
 @color-inv:    #FF8C00; // orange
-@color-map:    #87CEEB; // skyBlue
+@color-com:    #87CEEB; // skyBlue
 @color-ext:    #FF1493; // deepPink
 @color-menu:   #F0E68C; // khaki
 
@@ -192,8 +192,7 @@ body {
     }
 
     &.menu #menu,
-    &.save #submenu,
-    &.load #submenu,
+    &.episodes #submenu,
     &.settings #submenu,
     &.credits #submenu,
     &.newgame #menu,
@@ -202,7 +201,6 @@ body {
     }
     &.menu #backToMenu,
     &.newgame #backToMenu,
-    &.waiting #save,
     &.waiting #continue {
         display: none;
     }
@@ -278,9 +276,9 @@ body {
             .box-sizing;
             &:hover {
                 &.hp  { .text-shadow(@color-hp); }
-                &.aug { .text-shadow(@color-aug); }
+                &.imp { .text-shadow(@color-imp); }
                 &.inv { .text-shadow(@color-inv); }
-                &.map { .text-shadow(@color-map); }
+                &.com { .text-shadow(@color-com); }
                 &.ext { .text-shadow(@color-ext); }
                 .index {
                     opacity: 1.0;
@@ -342,7 +340,7 @@ body {
     .data {
         float: left;
     }
-    .date {
+    .name {
         padding: 0.1em 0;
         font-size: 0.8em;
         opacity: 0.3;

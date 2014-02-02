@@ -12,6 +12,8 @@ module.exports = function(grunt) {
                 // Assemble different game objects
                 src: [
                     "js/game/copyright.js",
+                    "js/game/Doa.js",
+                    "js/game/Storage.js",
                     "js/game/Controller.js"
                 ],
                 dest: 'js/Game.js'
